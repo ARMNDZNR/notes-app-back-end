@@ -1,0 +1,26 @@
+{
+  "name": "notes-app-back-end",
+  "version": "1.0.0",
+  "main": "server.js",
+  "repository": {
+	"url": "https://github.com/ARMNDZNR/notes-app-back-end",
+	"type": "git"
+  },
+  "scripts": {
+    "start": "nodemon ./src/server.js",
+    "lint": "eslint ./src"
+  },
+  "license": "MIT",
+  "dependencies": {
+    "@hapi/hapi": "^20.2.2",
+    "nanoid": "^4.0.0"
+  },
+  "devDependencies": {
+    "eslint": "^8.0.1",
+    "eslint-config-standard": "^17.0.0",
+    "eslint-plugin-import": "^2.25.2",
+    "eslint-plugin-n": "^15.0.0",
+    "eslint-plugin-promise": "^6.0.0",
+    "nodemon": "^2.0.16"
+  }
+}
