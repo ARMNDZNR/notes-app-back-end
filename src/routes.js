@@ -1,14 +1,11 @@
 // routes.js
-
-const notes = require('notes')
+const { addNoteHandler } = require('./handler')
 
 const routes = [
     {
-        method: 'GET',
+        method: 'POST',
         path: '/notes',
-        handler: (request, h) => {
-
-        }
+        handler: addNoteHandler
     }
 ]
 
