@@ -1,7 +1,19 @@
 // handler.js
 
 const { nanoid } = require('nanoid')
-const notes = require('./notes')
+const fs = require('fs')
+const path = require('path')
+
+const notes = []
+
+try {
+    const loadNotes = require('./loadNotes.json')
+    notes.push(...loadNotes)
+} catch (err) {
+    // do nothing
+}
+
+const saveNotes = () => fs.writeFileSync(path.resolve(__dirname, 'loadNotes.json'), JSON.stringify(notes))
 
 const addNoteHandler = (request, h) => {
     const { title, tags, body } = request.payload
@@ -19,6 +31,7 @@ const addNoteHandler = (request, h) => {
     const isSuccess = notes.filter(note => note.id === id).length > 0
 
     if (isSuccess) {
+        saveNotes()
         const response = h.response({
             status: 'success',
             message: 'Catatan berhasil ditambahkan',
@@ -78,6 +91,8 @@ const editNoteByIdHandler = (request, h) => {
             body
         }
 
+        saveNotes()
+
         return h.response({
             status: 'success',
             message: 'Catatan berhasil diperbarui'
@@ -97,6 +112,8 @@ const deleteNoteByIdHandler = (request, h) => {
     const index = notes.findIndex(note => note.id === id)
     if (index !== -1) {
         notes.splice(index, 1)
+
+        saveNotes()
 
         return h.response({
             status: 'success',
